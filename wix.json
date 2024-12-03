@@ -1,0 +1,32 @@
+{
+  "product": "YOUR_PRODUCT_NAME",
+  "company": "YOUR_COMPANY_NAME",
+  "license": "LICENSE",
+  "upgrade-code": "d01f1f1b-4b0c-4308-acf3-96fb719c7123",
+  "files": {
+    "guid": "5190aa71-e6f6-406f-bc98-a655a2f22d85",
+    "items": [
+      "Go-Windows-Notif-Service.exe"
+    ]
+  },
+  "env": {
+    "guid": "9d271582-a71a-4bd1-bab1-cc8242e3f1b5",
+    "vars": [
+      {
+        "name": "PATH",
+        "value": "[INSTALLDIR]",
+        "permanent": "no",
+        "system": "no",
+        "action": "set",
+        "part": "last"
+      }
+    ]
+  },
+  "shortcuts": {},
+  "choco": {
+    "description": "Notification Service",
+    "project-url": "YOUR_PROJECT_URL",
+    "tags": "TAGS YOU NEED",
+    "license-url": "YOUR_LICENSE_URL"
+  }
+}
