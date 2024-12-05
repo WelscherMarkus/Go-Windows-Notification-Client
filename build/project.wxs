@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Package Language="1033"
+             Manufacturer="Acme Corporation"
+             Name="Custom Notification Client"
+             Version="1.0.0.7"
+             UpgradeCode="9606C6F9-C8C0-4702-4FDD-CC7C9BB41F81">
+
+        <MediaTemplate EmbedCab="yes"/>
+
+        <Icon Id="NotificationIcon.exe" SourceFile="assets/notification.ico"/>
+
+        <StandardDirectory Id="ProgramFilesFolder">
+            <Directory Id="INSTALLFOLDER" Name="!(bind.Property.ProductName)">
+                <Component Id="MainExecutableComponent" Guid="*">
+                    <File KeyPath="yes" Source="main.exe">
+                        <Shortcut Id="ApplicationStartMenuShortcut"
+                                  Directory="ProgramMenuSubfolder"
+                                  Name="!(bind.Property.ProductName)"
+                                  WorkingDirectory="INSTALLFOLDER"
+                                  Icon="NotificationIcon.exe"
+                                  IconIndex="0"
+                                  Advertise="yes"/>
+                    </File>
+                </Component>
+                <Component Id="IconComponent" Guid="*">
+                    <File Id="NotificationIcon.exe" Source="assets/notification.ico"/>
+                </Component>
+
+            </Directory>
+        </StandardDirectory>
+
+        <StandardDirectory Id="ProgramMenuFolder">
+            <Directory Id="ProgramMenuSubfolder" Name="!(bind.Property.ProductName)">
+                <Component Id="RemoveProgramMenuSubfolder" Guid="*">
+                    <RemoveFolder Id="RemoveProgramMenuSubfolder" On="uninstall"/>
+                    <RegistryValue Root="HKCU" Key="Software\!(bind.Property.Manufacturer)\!(bind.Property.ProductName)"
+                                   Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+                </Component>
+            </Directory>
+        </StandardDirectory>
+
+        <Feature Id="CustomNotificationClientFeature">
+            <ComponentRef Id="MainExecutableComponent"/>
+            <ComponentRef Id="IconComponent"/>
+            <ComponentRef Id="RemoveProgramMenuSubfolder"/>
+        </Feature>
+    </Package>
+</Wix>
